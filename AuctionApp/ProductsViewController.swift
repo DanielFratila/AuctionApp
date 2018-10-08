@@ -15,7 +15,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     var users = [User]()
     var products = [Product]()
     var activityindicator = UIActivityIndicatorView()
-    
+    var destinationGlobalController = DetailOfProductViewController()
     //var aux = Product(imageOfProduct: UIImage(named: "jeepIcon")!, nameOfProduct: "Jeep", priceOfProduct: 22.500, offerExpires: 10)
     
     @IBOutlet weak var searchTextField: UITextField!
@@ -47,6 +47,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        destinationGlobalController.indexPathOfProduct = indexPath.item
         
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -195,6 +196,15 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         }
         
         return UIImage(named: "noImageIcon")!
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetails" {
+            if let destinationVC = segue.destination as? DetailOfProductViewController {
+                destinationVC.products = self.products
+                destinationVC.users = self.users
+                destinationGlobalController = destinationVC
+                }
+            }
     }
 }
 //appending it to list if user == the one the has been searched

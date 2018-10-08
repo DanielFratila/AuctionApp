@@ -14,15 +14,25 @@ class DetailOfProductViewController: UIViewController {
     @IBOutlet weak var descriptionOfProduct: UITextView!
     @IBOutlet weak var currentBidLabel: UILabel!
     @IBOutlet weak var timeLeftLabel: UILabel!
-    
+    var products = [Product]()
+    var users = [User]()
+    var indexPathOfProduct: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.titleOfProduct.text = self.products[self.indexPathOfProduct].nameOfProduct
+            self.imageOfProduct.image =  self.products[self.indexPathOfProduct].imageOfProduct
+            self.descriptionOfProduct.text = self.products[self.indexPathOfProduct].descriptionOfProduct
+            self.currentBidLabel.text = "\(self.products[self.indexPathOfProduct].currentBid)$$$"
+            self.timeLeftLabel.text = "\(self.products[self.indexPathOfProduct].endTimeOfProduct!)h"
+        }
        
     }
-    
-     override var prefersStatusBarHidden: Bool { return true }
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    override var prefersStatusBarHidden: Bool { return true }
     
     @IBAction func bidNowAction(_ sender: Any) {
         

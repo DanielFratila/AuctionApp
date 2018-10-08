@@ -277,7 +277,7 @@
                                             <outlet property="imageOfProduct" destination="fDE-l6-b10" id="zXP-sc-jag"/>
                                             <outlet property="priceOfProduct" destination="D9C-1q-teV" id="5s4-eU-2Z9"/>
                                             <outlet property="timeLeftOfProduct" destination="wue-1e-poX" id="caP-ey-bUA"/>
-                                            <segue destination="eWp-QV-CrI" kind="presentation" modalTransitionStyle="flipHorizontal" id="98H-L8-JWz"/>
+                                            <segue destination="eWp-QV-CrI" kind="presentation" identifier="showDetails" modalTransitionStyle="flipHorizontal" id="98H-L8-JWz"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -356,7 +356,7 @@
                                     <tabBarItem title="Profile" image="profileIcon" id="nZb-IV-cyv"/>
                                 </items>
                             </tabBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lIH-AJ-MIx">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lIH-AJ-MIx">
                                 <rect key="frame" x="20" y="243.5" width="335" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -402,6 +402,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="bidNowAction:" destination="eWp-QV-CrI" eventType="touchUpInside" id="d0i-QR-nEM"/>
+                                    <segue destination="p3R-qk-ntU" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="hku-J7-XQM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -441,6 +442,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTu-WW-uUl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3247" y="-201"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wvd-qF-dDb">
+            <objects>
+                <viewController id="p3R-qk-ntU" sceneMemberID="viewController">
+                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="aCI-qz-TIf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9vp-Ur-p1P">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvS-yU-avP">
+                                    <rect key="frame" x="67.5" y="268.5" width="240" height="130"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hza-GJ-OTV">
+                                            <rect key="frame" x="60" y="102" width="120" height="30"/>
+                                            <color key="backgroundColor" red="0.37211247670000003" green="0.91163253779999998" blue="0.67524287819999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="AXI-lq-zNn"/>
+                                                <constraint firstAttribute="height" constant="30" id="SqL-qV-sci"/>
+                                            </constraints>
+                                            <state key="normal" title="Confirm">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="13"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bid " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTD-N8-1pL">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="30"/>
+                                            <color key="backgroundColor" red="0.33918226909999999" green="0.65350387629999995" blue="0.75224539410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="d5h-Qm-OJz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert amount in dollars" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="act-Vx-4l1">
+                                            <rect key="frame" x="60" y="55" width="120" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="JQc-DO-Y9V"/>
+                                                <constraint firstAttribute="height" constant="20" id="LRj-M2-dNX"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="act-Vx-4l1" firstAttribute="centerY" secondItem="tvS-yU-avP" secondAttribute="centerY" id="5ci-dd-y7z"/>
+                                        <constraint firstItem="Hza-GJ-OTV" firstAttribute="centerX" secondItem="tvS-yU-avP" secondAttribute="centerX" id="7qr-DB-OUR"/>
+                                        <constraint firstItem="act-Vx-4l1" firstAttribute="centerX" secondItem="tvS-yU-avP" secondAttribute="centerX" id="EKz-3f-KQf"/>
+                                        <constraint firstItem="jTD-N8-1pL" firstAttribute="leading" secondItem="tvS-yU-avP" secondAttribute="leading" id="OIX-HW-XHU"/>
+                                        <constraint firstAttribute="trailing" secondItem="jTD-N8-1pL" secondAttribute="trailing" id="Pvi-xk-yJQ"/>
+                                        <constraint firstItem="Hza-GJ-OTV" firstAttribute="centerY" secondItem="tvS-yU-avP" secondAttribute="centerY" multiplier="1.8" id="c2L-em-dnp"/>
+                                        <constraint firstItem="jTD-N8-1pL" firstAttribute="top" secondItem="tvS-yU-avP" secondAttribute="top" id="eNc-bE-YwU"/>
+                                        <constraint firstAttribute="width" constant="240" id="i9v-y9-1nq"/>
+                                        <constraint firstAttribute="height" constant="130" id="paA-Mh-rSc"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="tvS-yU-avP" firstAttribute="centerY" secondItem="9vp-Ur-p1P" secondAttribute="centerY" id="Foj-6U-hiZ"/>
+                                <constraint firstItem="tvS-yU-avP" firstAttribute="centerX" secondItem="9vp-Ur-p1P" secondAttribute="centerX" id="XLz-rf-Nby"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HpR-Me-YJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4233" y="-197"/>
         </scene>
         <!--Register-->
         <scene sceneID="Y1h-Gc-8xe">
@@ -778,6 +856,6 @@
         <image name="profileIcon" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="98H-L8-JWz"/>
+        <segue reference="bde-XZ-bQ5"/>
     </inferredMetricsTieBreakers>
 </document>
