@@ -14,6 +14,8 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     @IBOutlet weak var tabBar: UITabBar!
     var users = [User]()
     var products = [Product]()
+    var activityindicator = UIActivityIndicatorView()
+    
     //var aux = Product(imageOfProduct: UIImage(named: "jeepIcon")!, nameOfProduct: "Jeep", priceOfProduct: 22.500, offerExpires: 10)
     
     @IBOutlet weak var searchTextField: UITextField!
@@ -59,7 +61,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
             cell?.descriptionOfProduct.text = aux
         }
         if let aux = products[indexPath.item].lowestBid {
-            cell?.priceOfProduct.text = "\(aux)$$$"
+            cell?.priceOfProduct.text = "\(aux) $$$"
         }
         if let aux = products[indexPath.item].endTimeOfProduct{
             cell?.timeLeftOfProduct.text = aux + "h"
@@ -149,14 +151,29 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
                 
             }
         })
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+        startActivityIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // change 2 to desired number of seconds
             print("prooodutcs before reloading \(self.products.count)")
             print("users \(self.users.count)")
+            self.stopActivityIndicator()
             self.collectionView.reloadData()
         }
         
     }
-    
+    func startActivityIndicator(){
+        activityindicator.center = self.view.center
+        activityindicator.hidesWhenStopped = true
+        activityindicator.style = UIActivityIndicatorView.Style.gray
+        view.addSubview(activityindicator)
+        
+        activityindicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+    }
+    func stopActivityIndicator(){
+        activityindicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
     func putCurrentProfilePicture(idOfUser: String,name: String, product: Product) -> UIImage {
         let storageRef = Storage.storage().reference().child(idOfUser).child("productImage").child(name)
         var image = UIImage()
@@ -170,7 +187,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
                 bool = true
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             if bool == true{
                 product.imageOfProduct = image
                 print(bool)
