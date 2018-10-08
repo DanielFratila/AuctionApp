@@ -18,19 +18,22 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     
     @IBOutlet weak var searchTextField: UITextField!
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.init(red: 160.0/255.0, green: 160.0/255.0, blue: 160.0/255.0, alpha: 0.5)
         collectionView.alwaysBounceVertical = true
         self.tabBar.delegate = self
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
         fetchDataFromFirebase()
     }
-    
     override var prefersStatusBarHidden: Bool { return true }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -47,11 +50,21 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productDetail", for: indexPath) as? ProductCollectionViewCell
         //cell?.product = aux
+        
         cell?.backgroundColor = UIColor.white
-        cell!.imageOfProduct.image = UIImage(named: "jeepIcon")
-        cell?.descriptionOfProduct.text = "Jeep"
-        cell?.priceOfProduct.text = "US $ 22.999"
-        cell?.timeLeftOfProduct.text = "Time left 04:39:02"
+        if let aux = products[indexPath.item].imageOfProduct{
+            cell!.imageOfProduct.image = aux
+        }
+        if let aux = products[indexPath.item].nameOfProduct{
+            cell?.descriptionOfProduct.text = aux
+        }
+        if let aux = products[indexPath.item].lowestBid {
+            cell?.priceOfProduct.text = "\(aux)$$$"
+        }
+        if let aux = products[indexPath.item].endTimeOfProduct{
+            cell?.timeLeftOfProduct.text = aux + "h"
+        }
+        
         return cell!
     }
     
@@ -103,54 +116,76 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
                     let id = aux.key
                     let email  = userObject?["email"] as? String
                     //for productDetail in aux.children.allObjects {
-                    var product: Product
-                    if let productDescription = userObject!["description"]  as? String{
-                        product = Product()
-                        product.descriptionOfProduct = productDescription as? String
-                        if let endTime = userObject!["endTime"] {
-                            product.endTimeOfProduct = endTime as? String
-                            if let lowestBid = userObject!["lowestBid"] {
-                                product.lowestBid = lowestBid as? Double
-                                if let name = userObject!["name"] {
-                                    product.nameOfProduct = name as? String
-                                }
-                            }
+                    for (key,value) in userObject!{
+                        //print("key \(key) with value \(value)")
+                        let product = Product()
+
+                        if !key.elementsEqual("email"){
+                            let detailsOfProduct = value as? [String: String]
+                            product.descriptionOfProduct = detailsOfProduct!["description"]
+                            product.endTimeOfProduct = detailsOfProduct!["endTime"]
+                            product.lowestBid = (detailsOfProduct!["lowestBid"] as! NSString).doubleValue
+                            product.nameOfProduct = detailsOfProduct!["name"]
+                            
+                            var image = UIImage()
+                            image = self.putCurrentProfilePicture(idOfUser: id,name: product.nameOfProduct!,product: product)
+                            product.imageOfProduct = image
                         }
-                         self.products.append(product)
+                        //if product was modified and exists we re appending to products
+                        if let aux = product.descriptionOfProduct{
+                            
+                            self.products.append(product)
+                        }
                     }
-
-                    
-                   
-                    
-                    
-                    
-
-                   
-                    //}
                     let user = User()
                     user.email = email
                     user.id = id
                     user.products = self.products
                     
                     self.users.append(user)
-                    
-                    
-                    //appending it to list if user == the one the has been searched
+                   
+                }
+                
+                
+            }
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+            print("prooodutcs before reloading \(self.products.count)")
+            print("users \(self.users.count)")
+            self.collectionView.reloadData()
+        }
+        
+    }
+    
+    func putCurrentProfilePicture(idOfUser: String,name: String, product: Product) -> UIImage {
+        let storageRef = Storage.storage().reference().child(idOfUser).child("productImage").child(name)
+        var image = UIImage()
+        var bool: Bool = false
+        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error)
+            } else {
+                // Data for “images/island.jpg” is returned
+                image = UIImage(data: data!)!
+                bool = true
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if bool == true{
+                product.imageOfProduct = image
+                print(bool)
+            }
+        }
+        
+        return UIImage(named: "noImageIcon")!
+    }
+}
+//appending it to list if user == the one the has been searched
 //                    if (user.username.lowercased()).hasPrefix(s.lowercased()) {
 //                        self.users.append(user)
 //                    }
-                }
-                
-                //reloading the tableview
-                self.collectionView.reloadData()
-            }
-        })
-    }
-
-
-
-
-    }
+//reloading the tableview
+//
     //
     //            if let email = snapshot.childSnapshot(forPath: "email").value{
     //            var user = User()
@@ -170,3 +205,21 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
 //
 //                }
 //            })
+
+
+
+//                    if let productDescription = userObject!["description"]  as? String{
+//                        product = Product()
+//                        product.descriptionOfProduct = productDescription as? String
+//                        if let endTime = userObject!["endTime"] {
+//                            product.endTimeOfProduct = endTime as? String
+//                            if let lowestBid = userObject!["lowestBid"] {
+//                                product.lowestBid = lowestBid as? Double
+//                                if let name = userObject!["name"] {
+//                                    product.nameOfProduct = name as? String
+//                                }
+//                            }
+//                        }
+//                         self.products.append(product)
+//                    }
+

@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 class Product: NSObject{
     
-    var imageOfProduct: String?
+    var imageOfProduct: UIImage?
     var nameOfProduct: String?
     var priceOfProduct: Double?
     var offerExpires: String?

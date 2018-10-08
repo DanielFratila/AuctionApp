@@ -118,7 +118,7 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
                       "endTime" : endTime,
                       "lowestBid" : lowestBid] as [String : Any]
         ref.child("users").child(uid!).child(name).setValue(values)
-        saveImageInStorage(images: image, uids: uid!)
+        saveImageInStorage(images: image, uids: uid!,name: name)
         
         
         //saving in storage
@@ -126,8 +126,8 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
 
     }
     
-    func saveImageInStorage(images: UIImage, uids: String){        
-        let storageRef = Storage.storage().reference().child(uids).child("productImage").child("productImage.png")
+    func saveImageInStorage(images: UIImage, uids: String, name: String){
+        let storageRef = Storage.storage().reference().child(uids).child("productImage").child(name)
         if let uploadData = images.pngData()
         { storageRef.putData(uploadData, metadata: nil, completion: {
                 (metadata, error) in
