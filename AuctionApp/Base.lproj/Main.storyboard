@@ -494,7 +494,7 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" red="0.93314175130172095" green="0.91224137954113227" blue="0.757529744585694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="act-Vx-4l1" firstAttribute="centerY" secondItem="tvS-yU-avP" secondAttribute="centerY" id="5ci-dd-y7z"/>
                                         <constraint firstItem="Hza-GJ-OTV" firstAttribute="centerX" secondItem="tvS-yU-avP" secondAttribute="centerX" id="7qr-DB-OUR"/>
