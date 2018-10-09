@@ -23,6 +23,7 @@
 		6BF89E2421663306004DC5CD /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF89E2321663306004DC5CD /* AddProductViewController.swift */; };
 		6BF89E262166331D004DC5CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF89E252166331D004DC5CD /* ProfileViewController.swift */; };
 		6BF89E2821668677004DC5CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF89E2721668677004DC5CD /* User.swift */; };
+		6BF89E2C216C9E34004DC5CD /* BidModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF89E2B216C9E34004DC5CD /* BidModalViewController.swift */; };
 		7CE441AE1A2783B9B99400BE /* Pods_AuctionApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A23CA3B32D82A89E55B583 /* Pods_AuctionApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		6BF89E2321663306004DC5CD /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		6BF89E252166331D004DC5CD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BF89E2721668677004DC5CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6BF89E2B216C9E34004DC5CD /* BidModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,12 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				6BF89DFC2164D6CD004DC5CD /* AppDelegate.swift */,
-				6BF89E132164DC90004DC5CD /* LoginViewController.swift */,
-				6BF89E152164ECB6004DC5CD /* RegisterViewController.swift */,
-				6BF89E192164F81F004DC5CD /* ProductsViewController.swift */,
-				6BF89E2121661EC6004DC5CD /* DetailOfProductViewController.swift */,
-				6BF89E2321663306004DC5CD /* AddProductViewController.swift */,
-				6BF89E252166331D004DC5CD /* ProfileViewController.swift */,
+				6BF89E29216C9D9F004DC5CD /* Controllers */,
 				6BF89E002164D6CD004DC5CD /* Main.storyboard */,
 				6BF89E062164D6D3004DC5CD /* Assets.xcassets */,
 				6BF89E082164D6D3004DC5CD /* LaunchScreen.storyboard */,
@@ -106,10 +103,32 @@
 				6BF89E032164D6CD004DC5CD /* AuctionApp.xcdatamodeld */,
 				6BF89E172164F5E4004DC5CD /* ExtensionUITextField.swift */,
 				6BF89E1B21651B71004DC5CD /* ProductCollectionViewCell.swift */,
+				6BF89E2A216C9DCC004DC5CD /* Models */,
+			);
+			path = AuctionApp;
+			sourceTree = "<group>";
+		};
+		6BF89E29216C9D9F004DC5CD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6BF89E132164DC90004DC5CD /* LoginViewController.swift */,
+				6BF89E152164ECB6004DC5CD /* RegisterViewController.swift */,
+				6BF89E192164F81F004DC5CD /* ProductsViewController.swift */,
+				6BF89E2121661EC6004DC5CD /* DetailOfProductViewController.swift */,
+				6BF89E2321663306004DC5CD /* AddProductViewController.swift */,
+				6BF89E252166331D004DC5CD /* ProfileViewController.swift */,
+				6BF89E2B216C9E34004DC5CD /* BidModalViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6BF89E2A216C9DCC004DC5CD /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				6BF89E1F216527A7004DC5CD /* Product.swift */,
 				6BF89E2721668677004DC5CD /* User.swift */,
 			);
-			path = AuctionApp;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E3B7004672664745E9A8BB5B /* Pods */ = {
@@ -255,6 +274,7 @@
 				6BF89E142164DC90004DC5CD /* LoginViewController.swift in Sources */,
 				6BF89E1D21651B71004DC5CD /* ProductCollectionViewCell.swift in Sources */,
 				6BF89E262166331D004DC5CD /* ProfileViewController.swift in Sources */,
+				6BF89E2C216C9E34004DC5CD /* BidModalViewController.swift in Sources */,
 				6BF89E182164F5E4004DC5CD /* ExtensionUITextField.swift in Sources */,
 				6BF89E2821668677004DC5CD /* User.swift in Sources */,
 				6BF89DFD2164D6CD004DC5CD /* AppDelegate.swift in Sources */,

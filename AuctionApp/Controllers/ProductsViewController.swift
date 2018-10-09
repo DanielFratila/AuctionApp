@@ -131,7 +131,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
                             product.nameOfProduct = detailsOfProduct!["name"]
                             
                             var image = UIImage()
-                            image = self.putCurrentProfilePicture(idOfUser: id,name: product.nameOfProduct!,product: product)
+                            image = self.putCurrentProductpPhoto(idOfUser: id,name: product.nameOfProduct!,product: product)
                             product.imageOfProduct = image
                         }
                         //if product was modified and exists we re appending to products
@@ -175,7 +175,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         activityindicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
     }
-    func putCurrentProfilePicture(idOfUser: String,name: String, product: Product) -> UIImage {
+    func putCurrentProductpPhoto(idOfUser: String,name: String, product: Product) -> UIImage {
         let storageRef = Storage.storage().reference().child(idOfUser).child("productImage").child(name)
         var image = UIImage()
         var bool: Bool = false
