@@ -24,7 +24,7 @@ class DetailOfProductViewController: UIViewController {
             self.titleOfProduct.text = self.products[self.indexPathOfProduct].nameOfProduct
             self.imageOfProduct.image =  self.products[self.indexPathOfProduct].imageOfProduct
             self.descriptionOfProduct.text = self.products[self.indexPathOfProduct].descriptionOfProduct
-            self.currentBidLabel.text = "\(self.products[self.indexPathOfProduct].currentBid)$$$"
+            self.currentBidLabel.text = "\(self.products[self.indexPathOfProduct].lowestBid!)$$$"
             self.timeLeftLabel.text = "\(self.products[self.indexPathOfProduct].endTimeOfProduct!)h"
         }
        
@@ -38,5 +38,14 @@ class DetailOfProductViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "bidModal" {
+            if let destinationVC = segue.destination as? BidModalViewController {
+                destinationVC.products = self.products
+                destinationVC.users = self.users
+                destinationVC.indexPathOfProduct = self.indexPathOfProduct
+            }
+        }
+    }
     
 }

@@ -118,13 +118,11 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
                     let userObject = aux.value as? [String: AnyObject]
                     let id = aux.key
                     let email  = userObject?["email"] as? String
-                    //for productDetail in aux.children.allObjects {
                     for (key,value) in userObject!{
                         //print("key \(key) with value \(value)")
                         let product = Product()
-
                         if !key.elementsEqual("email"){
-                            let detailsOfProduct = value as? [String: String]
+                            let detailsOfProduct = value as? [String: String]                            
                             product.descriptionOfProduct = detailsOfProduct!["description"]
                             product.endTimeOfProduct = detailsOfProduct!["endTime"]
                             product.lowestBid = (detailsOfProduct!["lowestBid"] as! NSString).doubleValue
