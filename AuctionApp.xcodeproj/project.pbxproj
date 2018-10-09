@@ -101,8 +101,8 @@
 				6BF89E0B2164D6D3004DC5CD /* Info.plist */,
 				6BF89E112164D948004DC5CD /* GoogleService-Info.plist */,
 				6BF89E032164D6CD004DC5CD /* AuctionApp.xcdatamodeld */,
-				6BF89E172164F5E4004DC5CD /* ExtensionUITextField.swift */,
-				6BF89E1B21651B71004DC5CD /* ProductCollectionViewCell.swift */,
+				6BF89E30216CFB48004DC5CD /* Cells */,
+				6BF89E2F216CFB2A004DC5CD /* Extensions */,
 				6BF89E2A216C9DCC004DC5CD /* Models */,
 			);
 			path = AuctionApp;
@@ -129,6 +129,22 @@
 				6BF89E2721668677004DC5CD /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		6BF89E2F216CFB2A004DC5CD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6BF89E172164F5E4004DC5CD /* ExtensionUITextField.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6BF89E30216CFB48004DC5CD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6BF89E1B21651B71004DC5CD /* ProductCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E3B7004672664745E9A8BB5B /* Pods */ = {

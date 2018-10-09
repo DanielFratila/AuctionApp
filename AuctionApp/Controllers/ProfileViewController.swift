@@ -8,9 +8,12 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController,UITabBarDelegate {
-
+class ProfileViewController: UIViewController,UITabBarDelegate, UIImagePickerControllerDelegate {
+    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var tabBar: UITabBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.delegate = self
@@ -34,5 +37,13 @@ class ProfileViewController: UIViewController,UITabBarDelegate {
         }
         
     }
-
+    
+    @IBAction func modifyName(_ sender: Any) {
+        
+    }
+    
+    @IBAction func modifyEmail(_ sender: Any) {
+        
+    }
+    
 }
