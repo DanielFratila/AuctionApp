@@ -8,12 +8,14 @@
 
 import UIKit
 
-class DetailOfProductViewController: UIViewController {
+class DetailOfProductViewController: UIViewController , UITabBarDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var titleOfProduct: UILabel!
     @IBOutlet weak var imageOfProduct: UIImageView!
     @IBOutlet weak var descriptionOfProduct: UITextView!
     @IBOutlet weak var currentBidLabel: UILabel!
     @IBOutlet weak var timeLeftLabel: UILabel!
+    @IBOutlet weak var tabBar: UITabBar!
+    
     var products = [Product]()
     var users = [User]()
     var indexPathOfProduct: Int = 0
@@ -26,6 +28,7 @@ class DetailOfProductViewController: UIViewController {
             self.descriptionOfProduct.text = self.products[self.indexPathOfProduct].descriptionOfProduct
             self.currentBidLabel.text = "\(self.products[self.indexPathOfProduct].lowestBid!)$$$"
             self.timeLeftLabel.text = "\(self.products[self.indexPathOfProduct].endTimeOfProduct!)h"
+            self.tabBar.delegate = self
         }
        
     }
@@ -34,8 +37,23 @@ class DetailOfProductViewController: UIViewController {
     }
     override var prefersStatusBarHidden: Bool { return true }
     
-    @IBAction func bidNowAction(_ sender: Any) {
-        
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item.title {
+        case "Add Product":
+            let viewContr = self.storyboard?.instantiateViewController(withIdentifier: "addProductViewController")
+            viewContr!.modalTransitionStyle = .crossDissolve
+            self.present(viewContr!, animated: true, completion: nil)
+        case "Products":
+            let viewContr = self.storyboard?.instantiateViewController(withIdentifier: "productsViewController")
+            viewContr!.modalTransitionStyle = .crossDissolve
+            self.present(viewContr!, animated: true, completion: nil)
+        case "Profile":
+            let viewContr = self.storyboard?.instantiateViewController(withIdentifier: "profileViewController")
+            viewContr!.modalTransitionStyle = .crossDissolve
+            self.present(viewContr!, animated: true, completion: nil)
+        default:
+            print("Otherwise, do something else.")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
