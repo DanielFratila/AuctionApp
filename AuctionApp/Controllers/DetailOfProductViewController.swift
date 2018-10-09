@@ -26,8 +26,8 @@ class DetailOfProductViewController: UIViewController , UITabBarDelegate,UINavig
             self.titleOfProduct.text = self.products[self.indexPathOfProduct].nameOfProduct
             self.imageOfProduct.image =  self.products[self.indexPathOfProduct].imageOfProduct
             self.descriptionOfProduct.text = self.products[self.indexPathOfProduct].descriptionOfProduct
-            self.currentBidLabel.text = "\(self.products[self.indexPathOfProduct].lowestBid!)$$$"
-            self.timeLeftLabel.text = "\(self.products[self.indexPathOfProduct].endTimeOfProduct!)h"
+            self.currentBidLabel.text = "Current bid: \(self.products[self.indexPathOfProduct].lowestBid!)$"
+            self.timeLeftLabel.text = "Time left: \(self.products[self.indexPathOfProduct].endTimeOfProduct!)h"
             self.tabBar.delegate = self
         }
        
