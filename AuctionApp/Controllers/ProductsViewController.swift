@@ -9,14 +9,19 @@
 import UIKit
 import Firebase
 
-class ProductsViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, UITabBarDelegate {
+class ProductsViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, UITabBarDelegate ,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating{
+    
+    
+    @IBOutlet weak var searchingView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBar!
     var users = [User]()
     var products = [Product]()
     var activityindicator = UIActivityIndicatorView()
     var destinationGlobalController = DetailOfProductViewController()
-    @IBOutlet weak var searchTextField: UITextField!
+    var filtered: [Product] = []
+    var searchActive : Bool = false
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,16 +30,36 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         collectionView.backgroundColor = UIColor.init(red: 160.0/255.0, green: 160.0/255.0, blue: 160.0/255.0, alpha: 0.5)
         collectionView.alwaysBounceVertical = true
         self.tabBar.delegate = self
+        //setting searchBar
+        self.searchController.searchResultsUpdater = self
+        self.searchController.delegate = self
+        self.searchController.searchBar.delegate = self
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = true
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for products name"
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.becomeFirstResponder()
+        
+        searchingView.addSubview(searchController.searchBar)
+        
         
     }
     override func viewDidAppear(_ animated: Bool) {
         
         fetchDataFromFirebase()
+        
     }
     override var prefersStatusBarHidden: Bool { return true }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return products.count
+        if searchActive {
+            return filtered.count
+        }
+        else
+        {
+            return products.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -51,19 +76,18 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productDetail", for: indexPath) as? ProductCollectionViewCell
-        //cell?.product = aux
         
         cell?.backgroundColor = UIColor.white
-        if let aux = products[indexPath.item].imageOfProduct{
+        if let aux = filtered[indexPath.item].imageOfProduct{
             cell!.imageOfProduct.image = aux
         }
-        if let aux = products[indexPath.item].nameOfProduct{
+        if let aux = filtered[indexPath.item].nameOfProduct{
             cell?.descriptionOfProduct.text = aux
         }
-        if let aux = products[indexPath.item].lowestBid {
+        if let aux = filtered[indexPath.item].lowestBid {
             cell?.priceOfProduct.text = "\(aux) $$$"
         }
-        if let aux = products[indexPath.item].endTimeOfProduct{
+        if let aux = filtered[indexPath.item].endTimeOfProduct{
             cell?.timeLeftOfProduct.text = aux + "h"
         }
         
@@ -142,6 +166,9 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
             print("prooodutcs before reloading \(self.products.count)")
             print("users \(self.users.count)")
             self.stopActivityIndicator()
+            if self.searchController.searchBar.text == ""{
+                self.filtered = self.products
+            }
             self.collectionView.reloadData()
         }
         
@@ -182,6 +209,54 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         
         return UIImage(named: "noImageIcon")!
     }
+    //MARK: Search Bar
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        filtered = products
+        //collectionView.reloadData()
+        //self.dismiss(animated: true, completion: nil)
+    }
+    func updateSearchResults(for searchController: UISearchController) {
+        var searchProducts = [Product]()
+        let searchString = searchController.searchBar.text
+        if searchString != "" {
+        for auxiliarProduct in products{
+            if auxiliarProduct.nameOfProduct!.lowercased().contains(searchString!.lowercased()){
+                searchProducts.append(auxiliarProduct)
+            }
+        }
+        filtered = searchProducts
+        
+        self.collectionView.reloadData()
+        } else {
+            filtered = products
+            collectionView.reloadData()
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+        filtered = products
+        collectionView.reloadData()
+    }
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        filtered = products
+        collectionView.reloadData()
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        filtered = products
+        if !searchActive {
+            searchActive = true
+            collectionView.reloadData()
+        }
+        
+        searchController.searchBar.resignFirstResponder()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetails" {
             if let destinationVC = segue.destination as? DetailOfProductViewController {

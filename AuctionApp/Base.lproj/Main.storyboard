@@ -169,32 +169,9 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbq-eU-SHJ">
                                 <rect key="frame" x="0.0" y="70" width="375" height="66"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UNu-dJ-G5a">
-                                        <rect key="frame" x="0.0" y="13" width="375" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="M6Z-bZ-Jvf"/>
-                                        </constraints>
-                                        <color key="textColor" red="0.85005646859999995" green="0.8608777527" blue="0.92503238340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lookupIcon" translatesAutoresizingMaskIntoConstraints="NO" id="hc6-1A-dGN">
-                                        <rect key="frame" x="116.5" y="18" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="0WS-Qo-QVv"/>
-                                            <constraint firstAttribute="height" constant="30" id="v6C-Cc-PeA"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="CkB-gM-fH3"/>
-                                    <constraint firstItem="hc6-1A-dGN" firstAttribute="centerX" secondItem="cbq-eU-SHJ" secondAttribute="centerX" multiplier="0.7" id="HfW-Ug-JAY"/>
-                                    <constraint firstItem="UNu-dJ-G5a" firstAttribute="leading" secondItem="cbq-eU-SHJ" secondAttribute="leading" id="Oji-wW-CL2"/>
-                                    <constraint firstItem="UNu-dJ-G5a" firstAttribute="centerY" secondItem="cbq-eU-SHJ" secondAttribute="centerY" id="TKf-WD-4E2"/>
-                                    <constraint firstAttribute="trailing" secondItem="UNu-dJ-G5a" secondAttribute="trailing" id="lND-Fw-yQP"/>
-                                    <constraint firstItem="hc6-1A-dGN" firstAttribute="centerY" secondItem="cbq-eU-SHJ" secondAttribute="centerY" id="teI-cP-MxY"/>
                                 </constraints>
                             </view>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zeq-GV-gkE">
@@ -307,11 +284,28 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="YKw-Tm-X2c" id="ixR-O4-ytC"/>
-                        <outlet property="searchTextField" destination="UNu-dJ-G5a" id="VZd-Ic-4RQ"/>
+                        <outlet property="searchDisplayController" destination="0dR-jI-Q7V" id="0p1-bt-aNu"/>
+                        <outlet property="searchingView" destination="cbq-eU-SHJ" id="UXQ-01-1Km"/>
                         <outlet property="tabBar" destination="Zeq-GV-gkE" id="gIM-gt-etx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BBb-qY-A9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="SDT-lA-bJb">
+                    <connections>
+                        <outlet property="delegate" destination="MxZ-iR-dQt" id="EcX-Mp-P41"/>
+                        <outlet property="searchContentsController" destination="MxZ-iR-dQt" id="jXE-C4-gkQ"/>
+                        <outlet property="searchResultsDataSource" destination="MxZ-iR-dQt" id="hhd-Nb-Dyo"/>
+                        <outlet property="searchResultsDelegate" destination="MxZ-iR-dQt" id="bWh-7A-qVW"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="0dR-jI-Q7V">
+                    <connections>
+                        <outlet property="delegate" destination="MxZ-iR-dQt" id="TOa-ZZ-WmC"/>
+                        <outlet property="searchContentsController" destination="MxZ-iR-dQt" id="Rof-hu-k0I"/>
+                        <outlet property="searchResultsDataSource" destination="MxZ-iR-dQt" id="0dn-Nz-VaM"/>
+                        <outlet property="searchResultsDelegate" destination="MxZ-iR-dQt" id="ubP-nf-OkB"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="-215.44227886056973"/>
         </scene>
@@ -987,7 +981,6 @@
         <image name="addIcon" width="22.5" height="22.5"/>
         <image name="addImageIcon" width="343.5" height="275.25"/>
         <image name="back" width="22.5" height="22.5"/>
-        <image name="lookupIcon" width="225" height="225"/>
         <image name="mailIcon" width="480" height="480"/>
         <image name="noImageIcon" width="200" height="200"/>
         <image name="passwordIcon" width="512" height="512"/>
@@ -995,6 +988,6 @@
         <image name="profileIcon" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PiH-PK-kKf"/>
+        <segue reference="98H-L8-JWz"/>
     </inferredMetricsTieBreakers>
 </document>
