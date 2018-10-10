@@ -586,23 +586,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/BidModalViewController.swift"
-            timestampString = "560800557.746605"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AuctionApp/Controllers/BidModalViewController.swift"
-            timestampString = "560800557.753332"
+            timestampString = "560874500.951504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -614,31 +598,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.754891"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "fetchDataFromFirebase()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.756238"
+            filePath = "AuctionApp/Controllers/BidModalViewController.swift"
+            timestampString = "560874500.951842"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/ProductsViewController.swift"
+            timestampString = "560874500.9519629"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -650,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.757025"
+            timestampString = "560874500.952088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.757738"
+            timestampString = "560874500.952207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -682,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.758387"
+            timestampString = "560874500.952327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -698,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.759066"
+            timestampString = "560874500.952445"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -714,11 +698,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.75963"
+            timestampString = "560874500.952559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -730,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.760236"
+            timestampString = "560874500.9526761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.760896"
+            timestampString = "560874500.952786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -762,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.761561"
+            timestampString = "560874500.952901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -778,11 +762,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.762156"
+            timestampString = "560874500.953012"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -794,11 +778,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProductsViewController.swift"
-            timestampString = "560800557.7628"
+            timestampString = "560874500.953132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "fetchDataFromFirebase()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/ProductsViewController.swift"
+            timestampString = "560874500.953244"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "fetchDataFromFirebase()"
             landmarkType = "7">
          </BreakpointContent>
@@ -810,12 +810,92 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/BidModalViewController.swift"
-            timestampString = "560800557.763464"
+            timestampString = "560874500.953359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "publish()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/ProfileViewController.swift"
+            timestampString = "560874500.953473"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/LoginViewController.swift"
+            timestampString = "560874500.953601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "loginButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/LoginViewController.swift"
+            timestampString = "560874500.95372"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "loginButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/LoginViewController.swift"
+            timestampString = "560874500.953835"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "loginButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/LoginViewController.swift"
+            timestampString = "560874500.953958"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "loginButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -826,11 +906,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuctionApp/Controllers/ProfileViewController.swift"
-            timestampString = "560800557.764233"
+            timestampString = "560874500.954074"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuctionApp/Controllers/ProfileViewController.swift"
+            timestampString = "560874500.954185"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>

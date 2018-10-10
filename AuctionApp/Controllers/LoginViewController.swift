@@ -35,6 +35,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 return
             }
             //succesfully logged in
+            let defaults = UserDefaults.standard
+            if let flag = defaults.string(forKey: "name")?.elementsEqual(""){
+                
+            }else{
+                defaults.set(email, forKey: "email")
+                defaults.set("", forKey: "name")
+            }
             let viewContr = self.storyboard?.instantiateViewController(withIdentifier: "productsViewController")
             self.present(viewContr!, animated: true, completion: nil)
         }

@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController,UITabBarDelegate, UIImagePickerCon
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var tabBar: UITabBar!
     var imagePicker = UIImagePickerController()
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +24,21 @@ class ProfileViewController: UIViewController,UITabBarDelegate, UIImagePickerCon
         self.imagePicker.delegate = self
         checkPermission()
         setProfilePictureImageAttributes()
+        let name = defaults.string(forKey: "name")
+        let email = defaults.string(forKey: "email")
+        nameLabel.text = "Name: \(name!)"
+        emailLabel.text = "Email: \(email!)"
         
+        //read image from possible userDefaults
+        if let data = defaults.object(forKey: "savedImage") as? NSData{
+            profilePicture.setImage(UIImage(data: data as Data), for: .normal)
+        }
     }
     
     func setProfilePictureImageAttributes(){
         profilePicture.layer.cornerRadius = 0.5 * profilePicture.bounds.size.width
-        profilePicture.layer.borderWidth = 5.0
-        var customGreen = UIColor(red: 95, green: 232, blue: 194, alpha: 0.5)
+        profilePicture.layer.borderWidth = 4.0
+        var customGreen = UIColor.init(red: 95/255, green: 232/255, blue: 194/255, alpha: 0.5)
         profilePicture.layer.borderColor = customGreen.cgColor
         profilePicture.translatesAutoresizingMaskIntoConstraints = true
     }
@@ -65,7 +74,9 @@ class ProfileViewController: UIViewController,UITabBarDelegate, UIImagePickerCon
         }
         profilePicture.imageView?.contentMode = .scaleAspectFill
         profilePicture.setImage(selectedImage, for: .normal)
-        
+        //set image in userdefaults
+        let imageData:NSData = selectedImage.pngData()! as NSData
+        defaults.set(imageData, forKey: "savedImage")
         
         dismiss(animated: true, completion: nil)
     }
@@ -98,12 +109,31 @@ class ProfileViewController: UIViewController,UITabBarDelegate, UIImagePickerCon
         }
     }
     
+    func alertWarning(title: String,message: String,whichOneToModify: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert!.textFields![0] // Force unwrapping because we know it exists.
+            switch whichOneToModify{
+                case "name": self.defaults.set(textField.text!, forKey: "name")
+                case "email": self.defaults.set(textField.text!, forKey: "email")
+                default: break
+            }
+            self.nameLabel.text = "Name: \(self.defaults.string(forKey: "name")!)"
+            self.emailLabel.text = "Email: \(self.defaults.string(forKey: "email")!)"
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func modifyName(_ sender: Any) {
-        
+        alertWarning(title: "Modify name", message: "", whichOneToModify: "name")
     }
     
     @IBAction func modifyEmail(_ sender: Any) {
-        
+        alertWarning(title: "Modify email", message: "", whichOneToModify: "email")
     }
     
 }

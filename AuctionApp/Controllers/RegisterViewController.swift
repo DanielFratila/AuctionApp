@@ -47,6 +47,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             let values = ["email" : email] as [String : Any]
             ref.child("users").child(uid).setValue(values)
             //succesfully logged in
+            let defaults = UserDefaults.standard
+            if let flag = defaults.string(forKey: "name")?.elementsEqual(""){
+                
+            }else{
+                defaults.set(email, forKey: "email")
+                defaults.set("", forKey: "name")
+            }
             let viewContr = self.storyboard?.instantiateViewController(withIdentifier: "productsViewController")
             self.present(viewContr!, animated: true, completion: nil)
         }

@@ -119,11 +119,6 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
                       "lowestBid" : lowestBid] as [String : Any]
         ref.child("users").child(uid!).child(name).setValue(values)
         saveImageInStorage(images: image, uids: uid!,name: name)
-        
-        
-        //saving in storage
-        
-
     }
     
     func saveImageInStorage(images: UIImage, uids: String, name: String){

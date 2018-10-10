@@ -16,9 +16,8 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     var products = [Product]()
     var activityindicator = UIActivityIndicatorView()
     var destinationGlobalController = DetailOfProductViewController()
-    //var aux = Product(imageOfProduct: UIImage(named: "jeepIcon")!, nameOfProduct: "Jeep", priceOfProduct: 22.500, offerExpires: 10)
-    
     @IBOutlet weak var searchTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
@@ -87,18 +86,6 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         
     }
     
-//    func fetchData(){
-//        let ref = Database.database().reference()
-//        ref.observeSingleEvent(of: .value) { snapshot in
-//            print(snapshot.childrenCount) // I got the expected number of items
-//            let enumerator = snapshot.children
-//            while let rest = enumerator.nextObject() as? DataSnapshot {
-//                print(rest.value)
-//
-//
-//                }
-//            }
-//}
     func fetchDataFromFirebase() {
         let refUsers = Database.database().reference().child("users");
         
@@ -205,46 +192,3 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
             }
     }
 }
-//appending it to list if user == the one the has been searched
-//                    if (user.username.lowercased()).hasPrefix(s.lowercased()) {
-//                        self.users.append(user)
-//                    }
-//reloading the tableview
-//
-    //
-    //            if let email = snapshot.childSnapshot(forPath: "email").value{
-    //            var user = User()
-    //            user.email = email as! String
-    //            user.id = Auth.auth().currentUser?.uid
-    //            self.users.append(user)
-
-
-//        Database.database().reference().child("users").observeSingleEvent(of: .value, with : { (snapshot) in
-//            //print(snapshot)
-//            if let dictionary = snapshot.value as? [String: String]{
-//                let user = User()
-//                user.email = dictionary["email"]
-//                user.id = Auth.auth().currentUser?.uid
-//                self.users.append(user)
-//                self.collectionView.reloadData()
-//
-//                }
-//            })
-
-
-
-//                    if let productDescription = userObject!["description"]  as? String{
-//                        product = Product()
-//                        product.descriptionOfProduct = productDescription as? String
-//                        if let endTime = userObject!["endTime"] {
-//                            product.endTimeOfProduct = endTime as? String
-//                            if let lowestBid = userObject!["lowestBid"] {
-//                                product.lowestBid = lowestBid as? Double
-//                                if let name = userObject!["name"] {
-//                                    product.nameOfProduct = name as? String
-//                                }
-//                            }
-//                        }
-//                         self.products.append(product)
-//                    }
-

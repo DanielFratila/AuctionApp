@@ -837,7 +837,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Bit-6n-AX0">
-                                <rect key="frame" x="20" y="451" width="310" height="80"/>
+                                <rect key="frame" x="20" y="356" width="310" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cuj-tp-Sfn">
                                         <rect key="frame" x="0.0" y="0.0" width="310" height="30"/>
@@ -922,10 +922,10 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ota-xS-yHY">
-                                <rect key="frame" x="37.5" y="101" width="300" height="300"/>
+                                <rect key="frame" x="87.5" y="106" width="200" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="LOZ-yh-qdm"/>
-                                    <constraint firstAttribute="height" constant="300" id="Zm4-gs-V1a"/>
+                                    <constraint firstAttribute="width" constant="200" id="LOZ-yh-qdm"/>
+                                    <constraint firstAttribute="height" constant="200" id="Zm4-gs-V1a"/>
                                 </constraints>
                                 <state key="normal" image="noImageIcon"/>
                                 <userDefinedRuntimeAttributes>
@@ -943,7 +943,7 @@
                             <constraint firstItem="W69-fb-p1F" firstAttribute="leading" secondItem="xNA-hk-8ZT" secondAttribute="leading" id="BuA-9q-Hyx"/>
                             <constraint firstItem="Bit-6n-AX0" firstAttribute="top" secondItem="Ota-xS-yHY" secondAttribute="bottom" constant="50" id="L4p-8S-N01"/>
                             <constraint firstItem="W69-fb-p1F" firstAttribute="top" secondItem="xNA-hk-8ZT" secondAttribute="top" id="UmY-Fa-5kz"/>
-                            <constraint firstItem="Ota-xS-yHY" firstAttribute="centerY" secondItem="xNA-hk-8ZT" secondAttribute="centerY" multiplier="0.73" id="ZVL-2b-iIP"/>
+                            <constraint firstItem="Ota-xS-yHY" firstAttribute="centerY" secondItem="xNA-hk-8ZT" secondAttribute="centerY" multiplier="0.6" id="ZVL-2b-iIP"/>
                             <constraint firstItem="Bit-6n-AX0" firstAttribute="leading" secondItem="xNA-hk-8ZT" secondAttribute="leading" constant="20" id="ci9-wO-60b"/>
                             <constraint firstItem="xNA-hk-8ZT" firstAttribute="trailing" secondItem="W69-fb-p1F" secondAttribute="trailing" id="ix2-db-pYj"/>
                             <constraint firstItem="C0g-3E-AtF" firstAttribute="leading" secondItem="xNA-hk-8ZT" secondAttribute="leading" id="lTk-AI-RmE"/>

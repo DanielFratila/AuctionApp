@@ -17,9 +17,6 @@ class BidModalViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-      
     }
   
     @IBAction func confirmBid(_ sender: Any) {
