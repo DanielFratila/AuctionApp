@@ -18,13 +18,24 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     var users = [User]()
     var products = [Product]()
     var activityindicator = UIActivityIndicatorView()
-    var destinationGlobalController = DetailOfProductViewController()
     var filtered: [Product] = []
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
+        
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
+        fetchDataFromFirebase()
+        
+    }
+    override var prefersStatusBarHidden: Bool { return true }
+    
+    func setDelegates() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.init(red: 160.0/255.0, green: 160.0/255.0, blue: 160.0/255.0, alpha: 0.5)
@@ -42,15 +53,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         searchController.searchBar.becomeFirstResponder()
         
         searchingView.addSubview(searchController.searchBar)
-        
-        
     }
-    override func viewDidAppear(_ animated: Bool) {
-        
-        fetchDataFromFirebase()
-        
-    }
-    override var prefersStatusBarHidden: Bool { return true }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searchActive {
@@ -71,11 +74,17 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destinationGlobalController = self.storyboard!.instantiateViewController(withIdentifier: "DetailOfProductViewController") as! DetailOfProductViewController
         destinationGlobalController.indexPathOfProduct = indexPath.item
-        
+        destinationGlobalController.products = self.filtered
+        destinationGlobalController.users = self.users
+        searchController.searchBar.resignFirstResponder()
+        searchActive = false
+        self.show(destinationGlobalController, sender: self)
+//        self.present(destinationGlobalController, animated: true, completion: nil)
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productDetail", for: indexPath) as? ProductCollectionViewCell
+          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productDetail", for: indexPath) as? ProductCollectionViewCell
         
         cell?.backgroundColor = UIColor.white
         if let aux = filtered[indexPath.item].imageOfProduct{
@@ -257,13 +266,13 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         searchController.searchBar.resignFirstResponder()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetails" {
-            if let destinationVC = segue.destination as? DetailOfProductViewController {
-                destinationVC.products = self.products
-                destinationVC.users = self.users
-                destinationGlobalController = destinationVC
-                }
-            }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "showDetails" {
+//            if let destinationVC = segue.destination as? DetailOfProductViewController {
+//                destinationVC.products = self.products
+//                destinationVC.users = self.users
+//                destinationGlobalController = destinationVC
+//                }
+//            }
+//    }
 }

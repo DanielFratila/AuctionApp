@@ -254,7 +254,6 @@
                                             <outlet property="imageOfProduct" destination="fDE-l6-b10" id="zXP-sc-jag"/>
                                             <outlet property="priceOfProduct" destination="D9C-1q-teV" id="5s4-eU-2Z9"/>
                                             <outlet property="timeLeftOfProduct" destination="wue-1e-poX" id="caP-ey-bUA"/>
-                                            <segue destination="eWp-QV-CrI" kind="presentation" identifier="showDetails" modalTransitionStyle="flipHorizontal" id="98H-L8-JWz"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -312,7 +311,7 @@
         <!--Detail Of Product View Controller-->
         <scene sceneID="4VI-Rk-Gnc">
             <objects>
-                <viewController id="eWp-QV-CrI" customClass="DetailOfProductViewController" customModule="AuctionApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailOfProductViewController" id="eWp-QV-CrI" customClass="DetailOfProductViewController" customModule="AuctionApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a50-y6-ml6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -988,6 +987,6 @@
         <image name="profileIcon" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="98H-L8-JWz"/>
+        <segue reference="hku-J7-XQM"/>
     </inferredMetricsTieBreakers>
 </document>
