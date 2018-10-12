@@ -54,6 +54,15 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         guard let selectedImage = info[.originalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
+//        if let imageData = selectedImage.pngData() {
+//            let bytes = imageData.count
+//            let kB = Double(bytes) / 1000.0 // Note the difference
+//            if kB > 3000{
+//                alertWarning(title: "Failure", message: "Your image shouldn't exceed 3 mB")
+//                return
+//            }
+//        }
+        
         imageOfProduct.imageView?.contentMode = .scaleAspectFit
         imageOfProduct.setImage(selectedImage, for: .normal)
         
@@ -114,7 +123,6 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
             alertWarning(title: "Failure", message: "Form is not valid!You must complete all fields and add a photo")
             return
         }
-        
         
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference()

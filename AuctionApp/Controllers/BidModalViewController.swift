@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class BidModalViewController: UIViewController{
+class BidModalViewController: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var amount: UITextField!
     var products = [Product]()
     var users = [User]()
@@ -18,6 +18,7 @@ class BidModalViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.amount.delegate = self
     }
   
     @IBAction func confirmBid(_ sender: Any) {
@@ -68,6 +69,9 @@ class BidModalViewController: UIViewController{
             }
         }
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 
 }
