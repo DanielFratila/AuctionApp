@@ -36,13 +36,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error != nil{
                 print("error")
+                self.alertWarning(title: "Failure", message: "Your credentials are too weak")
                 return
             }
             
             guard let uid = Auth.auth().currentUser?.uid else {
                 return
             }
-           
+            self.alertWarning(title: "Succesfull", message: "Your account has just been created")
             let ref = Database.database().reference()
             let values = ["email" : email] as [String : Any]
             ref.child("users").child(uid).setValue(values)

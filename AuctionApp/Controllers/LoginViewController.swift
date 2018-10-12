@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error)
-                alertwarnin
+                self.alertWarning(title: "Failure", message: "The password is invalid or the user does not have a password")
                 return
             }
             //succesfully logged in
