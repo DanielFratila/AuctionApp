@@ -107,18 +107,25 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
     @IBAction func publish(_ sender: Any) {
         guard let image = imageOfProduct.currentImage,let name = nameField.text,
             let description = descriptionTextField.text, let endTime = endTimeField.text, let lowestBid = lowestBidField.text else{
-            print("Form is not valid")
+            alertWarning(title: "Failure", message: "Form is not valid!You must complete all fields and add a photo")
             return
         }
+        if image.images?.count == 0 || name == "" || description == "" || endTime == "" || lowestBid == "" {
+            alertWarning(title: "Failure", message: "Form is not valid!You must complete all fields and add a photo")
+            return
+        }
+        
         
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference()
         let values = ["name" : name,
                       "description" : description,
                       "endTime" : endTime,
+                      "publishDate" : String(NSDate().timeIntervalSince1970),
                       "lowestBid" : lowestBid] as [String : Any]
         ref.child("users").child(uid!).child(name).setValue(values)
         saveImageInStorage(images: image, uids: uid!,name: name)
+        alertWarning(title: "Success", message: "Your product has been registered")
     }
     
     func saveImageInStorage(images: UIImage, uids: String, name: String){
@@ -142,5 +149,11 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
                 
             })
         }
+    }
+    
+    func alertWarning(title: String,message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

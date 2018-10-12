@@ -32,6 +32,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 print(error)
+                alertwarnin
                 return
             }
             //succesfully logged in
@@ -50,6 +51,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    func alertWarning(title: String,message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

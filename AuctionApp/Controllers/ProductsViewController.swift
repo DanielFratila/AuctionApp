@@ -21,6 +21,11 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     var filtered: [Product] = []
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
+    var timer = [Timer]()
+    var isTimerRunning = false
+    var secondsOfOfferedProduct = [Int]()
+    var offerLabels = [UILabel]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,17 +79,19 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let destinationGlobalController = self.storyboard!.instantiateViewController(withIdentifier: "DetailOfProductViewController") as! DetailOfProductViewController
         destinationGlobalController.indexPathOfProduct = indexPath.item
         destinationGlobalController.products = self.filtered
         destinationGlobalController.users = self.users
+        destinationGlobalController.actualEndTime = "\(timeStringFromSecondsToHHMMSS(time: TimeInterval(secondsOfOfferedProduct[indexPath.item])))"  //modify endTime of selected product to actual
         searchController.searchBar.resignFirstResponder()
         searchActive = false
         self.show(destinationGlobalController, sender: self)
 //        self.present(destinationGlobalController, animated: true, completion: nil)
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productDetail", for: indexPath) as? ProductCollectionViewCell
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "productDetail", for: indexPath) as? ProductCollectionViewCell
         
         cell?.backgroundColor = UIColor.white
         if let aux = filtered[indexPath.item].imageOfProduct{
@@ -97,7 +104,11 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
             cell?.priceOfProduct.text = "\(aux) $$$"
         }
         if let aux = filtered[indexPath.item].endTimeOfProduct{
-            cell?.timeLeftOfProduct.text = aux + "h"
+            var auxTimer = Timer()
+            timer.append(auxTimer)
+            secondsOfOfferedProduct.append(0)
+            offerLabels.append((cell?.timeLeftOfProduct)!)
+            runTimer(index: indexPath.item)
         }
         
         return cell!
@@ -147,6 +158,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
                             product.endTimeOfProduct = detailsOfProduct!["endTime"]
                             product.lowestBid = (detailsOfProduct!["lowestBid"] as! NSString).doubleValue
                             product.nameOfProduct = detailsOfProduct!["name"]
+                            product.publishDate = (detailsOfProduct!["publishDate"]  as! NSString).doubleValue
                             
                             var image = UIImage()
                             image = self.putCurrentProductpPhoto(idOfUser: id,name: product.nameOfProduct!,product: product)
@@ -182,6 +194,57 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         }
         
     }
+    
+    func runTimer(index: Int) {
+        
+        timer[index] = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer(sender:))), userInfo: ["index": index], repeats: true)
+        
+    }
+    
+    @objc func updateTimer(sender: Timer) {
+        
+        var userInfoMap = sender.userInfo! as! [String: Any]
+        var index = userInfoMap["index"] as! Int
+        secondsOfOfferedProduct[index] = (Int(products[index].publishDate!) + timeStringFromHHMMSSToSeconds(string: products[index].endTimeOfProduct!)) -
+            Int(NSDate().timeIntervalSince1970)
+        if (secondsOfOfferedProduct[index] < 0){
+            secondsOfOfferedProduct[index] = 0
+            timer[index].invalidate()
+        }else {
+             secondsOfOfferedProduct[index] -= 1
+            
+        }
+        offerLabels[index].text = "\(timeStringFromSecondsToHHMMSS(time: TimeInterval(secondsOfOfferedProduct[index])))"
+    }
+//    secondsOfOfferedProduct[index] = (Int(products[index].publishDate!) + timeStringFromHHMMSSToSeconds(string: products[index].endTimeOfProduct!)) -
+//    Int(products[index].publishDate!) + Int(NSDate().timeIntervalSince1970)
+//    secondsOfOfferedProduct[index] -= 2
+//    let dateOffer = NSDate(timeIntervalSince1970: TimeInterval(secondsOfOfferedProduct[index]))
+//    offerLabels[index].text = "\(dateOffer)"
+//    products[index].endTimeOfProduct = timeStringFromSecondsToHHMMSS(time: TimeInterval(secondsOfOfferedProduct[index]))
+    
+    func timeStringFromHHMMSSToSeconds (string: String) -> Int {
+        var components: Array = string.components(separatedBy: ":")
+        if let hours = Int(components[0]){
+            if let minutes = Int(components[1]){
+                if let seconds = Int(components[2]){
+                    return hours * 60 * 60 + minutes * 60 + seconds
+                }
+                return hours * 60 * 60 + minutes * 60
+            }
+            return hours * 60 * 60
+        }
+        return 0
+        
+    }
+    
+    func timeStringFromSecondsToHHMMSS(time:TimeInterval) -> String {
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
+    
     func startActivityIndicator(){
         activityindicator.center = self.view.center
         activityindicator.hidesWhenStopped = true
@@ -266,13 +329,4 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
         searchController.searchBar.resignFirstResponder()
     }
 
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showDetails" {
-//            if let destinationVC = segue.destination as? DetailOfProductViewController {
-//                destinationVC.products = self.products
-//                destinationVC.users = self.users
-//                destinationGlobalController = destinationVC
-//                }
-//            }
-//    }
 }

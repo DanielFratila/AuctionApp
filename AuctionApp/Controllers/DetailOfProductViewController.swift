@@ -19,17 +19,18 @@ class DetailOfProductViewController: UIViewController , UITabBarDelegate,UINavig
     var products = [Product]()
     var users = [User]()
     var indexPathOfProduct: Int = 0
+    var actualEndTime = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        
             self.titleOfProduct.text = self.products[self.indexPathOfProduct].nameOfProduct
             self.imageOfProduct.image =  self.products[self.indexPathOfProduct].imageOfProduct
             self.descriptionOfProduct.text = self.products[self.indexPathOfProduct].descriptionOfProduct
             self.currentBidLabel.text = "Current bid: \(self.products[self.indexPathOfProduct].lowestBid!)$"
-            self.timeLeftLabel.text = "Time left: \(self.products[self.indexPathOfProduct].endTimeOfProduct!)h"
+            self.timeLeftLabel.text = "Time left: \(self.actualEndTime)h"
             self.tabBar.delegate = self
-        }
+        
        
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +63,7 @@ class DetailOfProductViewController: UIViewController , UITabBarDelegate,UINavig
                 destinationVC.products = self.products
                 destinationVC.users = self.users
                 destinationVC.indexPathOfProduct = self.indexPathOfProduct
+                destinationVC.actualEndTime = self.actualEndTime
             }
         }
     }

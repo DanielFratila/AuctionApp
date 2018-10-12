@@ -19,5 +19,5 @@ class Product: NSObject{
     var endTimeOfProduct: String?
     var lowestBid: Double?
     var currentBid: Double?
-    
+    var publishDate: Double?
 }

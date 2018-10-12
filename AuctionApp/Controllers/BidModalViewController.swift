@@ -14,6 +14,7 @@ class BidModalViewController: UIViewController{
     var products = [Product]()
     var users = [User]()
     var indexPathOfProduct: Int = 0
+    var actualEndTime = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +26,9 @@ class BidModalViewController: UIViewController{
         }
         if userPayment > products[indexPathOfProduct].lowestBid!{
             products[indexPathOfProduct].lowestBid = userPayment
-            alertWarning(title: "Succes",message: "Your bid was succesfully submitted")
             publish()
+            alertWarning(title: "Succes",message: "Your bid was succesfully submitted")
+            
         } else {
             alertWarning(title: "Failure!",message: "Your bid must be at least equal with the actual bid")
         }
@@ -45,6 +47,7 @@ class BidModalViewController: UIViewController{
         let values = ["name" : products[indexPathOfProduct].nameOfProduct,
                       "description" : products[indexPathOfProduct].descriptionOfProduct,
                       "endTime" : products[indexPathOfProduct].endTimeOfProduct,
+                      "publishDate" : "\(products[indexPathOfProduct].publishDate!)",
                       "lowestBid" : amount.text] as [String : Any]
         ref.child("users").child(uid!).child(products[indexPathOfProduct].nameOfProduct!).setValue(values)
         
@@ -60,6 +63,7 @@ class BidModalViewController: UIViewController{
                 destinationVC.products = self.products
                 destinationVC.users = self.users
                 destinationVC.indexPathOfProduct = self.indexPathOfProduct
+                destinationVC.actualEndTime = self.actualEndTime
                 
             }
         }
