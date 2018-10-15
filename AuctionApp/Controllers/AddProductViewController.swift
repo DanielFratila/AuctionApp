@@ -22,6 +22,7 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
     @IBOutlet weak var endTimeField: UITextField!
     @IBOutlet weak var lowestBidField: UITextField!
     var imagePicker = UIImagePickerController()
+    let timePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         self.lowestBidField.delegate = self
         self.imagePicker.delegate = self
         checkPermission()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -92,7 +94,30 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
             print("User has denied the permission.")
         }
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == endTimeField{
+            self.view.endEditing(true)
+            openTimePicker()
             
+        }
+    }
+    
+    func openTimePicker() {
+        timePicker.datePickerMode = UIDatePicker.Mode.time
+        timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
+        timePicker.backgroundColor = UIColor.white
+        self.view.addSubview(timePicker)
+        timePicker.addTarget(self, action: #selector(self.startTimeDiveChanged), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func startTimeDiveChanged(sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .full
+        endTimeField.text = formatter.string(from: sender.date)
+        timePicker.removeFromSuperview() // if you want to remove time picker
+    }
+    
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.title {
         case "Products":
@@ -123,16 +148,16 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
             alertWarning(title: "Failure", message: "Your image exceeds 1048 kB.Please upload another one!")
             return
         }
-        var verifyEndTime = verifyEndTimeFormat(time: endTime)
-        if !verifyEndTime {
-            alertWarning(title: "Failure", message: "Your end time format is not corect")
-            return 
-        }
+//        var verifyEndTime = verifyEndTimeFormat(time: endTime)
+//        if !verifyEndTime {
+//            alertWarning(title: "Failure", message: "Your end time format is not corect")
+//            return
+//        }
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference()
         let values = ["name" : name,
                       "description" : description,
-                      "endTime" : endTime,
+                      "endTime" : endTime.substring(to:endTime.index(endTime.startIndex, offsetBy: 8)),
                       "publishDate" : String(NSDate().timeIntervalSince1970),
                       "lowestBid" : lowestBid] as [String : Any]
         ref.child("users").child(uid!).child(name).setValue(values)
@@ -146,14 +171,14 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         return (imgData?.count)!
         
     }
-    func verifyEndTimeFormat(time: String) -> Bool{
-        var components: Array = time.components(separatedBy: ":")
-        guard let hours = Int(components[0]), let minutes = Int(components[1]), let seconds = Int(components[2]) else {
-            return false
-        }
-        //if (hours >= 0 && hours <= 99) && (minutes >= 0 && minutes <= 99) && (seconds >= 0 && seconds <= 99)
-        return true
-    }
+//    func verifyEndTimeFormat(time: String) -> Bool{
+//        var components: Array = time.components(separatedBy: ":")
+//        guard let hours = Int(components[0]), let minutes = Int(components[1]), let seconds = Int(components[2]) else {
+//            return false
+//        }
+//        //if (hours >= 0 && hours <= 99) && (minutes >= 0 && minutes <= 99) && (seconds >= 0 && seconds <= 99)
+//        return true
+//    }
     func saveImageInStorage(images: UIImage, uids: String, name: String){
         let storageRef = Storage.storage().reference().child(uids).child("productImage").child(name)
         if let uploadData = images.pngData()

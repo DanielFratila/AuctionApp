@@ -36,6 +36,11 @@ class ProfileViewController: UIViewController,UITabBarDelegate, UIImagePickerCon
     }
     
     func setProfilePictureImageAttributes(){
+        profilePicture.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.7)
+        profilePicture.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
+        let w = UIScreen.main.bounds.width
+        let h = UIScreen.main.bounds.height
+        profilePicture.center = CGPoint(x: w/2, y: h/3)
         profilePicture.layer.cornerRadius = 0.5 * profilePicture.bounds.size.width
         profilePicture.layer.borderWidth = 4.0
         var customGreen = UIColor.init(red: 95/255, green: 232/255, blue: 194/255, alpha: 0.5)

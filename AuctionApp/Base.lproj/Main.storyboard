@@ -930,10 +930,6 @@
                             </stackView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ota-xS-yHY">
                                 <rect key="frame" x="87.5" y="106" width="200" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="LOZ-yh-qdm"/>
-                                    <constraint firstAttribute="height" constant="200" id="Zm4-gs-V1a"/>
-                                </constraints>
                                 <state key="normal" image="noImageIcon"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1001,6 +997,6 @@
         <image name="profileIcon" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hku-J7-XQM"/>
+        <segue reference="PiH-PK-kKf"/>
     </inferredMetricsTieBreakers>
 </document>
