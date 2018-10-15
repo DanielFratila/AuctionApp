@@ -123,7 +123,16 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
             alertWarning(title: "Failure", message: "Form is not valid!You must complete all fields and add a photo")
             return
         }
-        
+        let imageSize = getImageSizeInBytes(image: image)
+        if imageSize/1000 > 1047{
+            alertWarning(title: "Failure", message: "Your image exceeds 1048 kB.Please upload another one!")
+            return
+        }
+        var verifyEndTime = verifyEndTimeFormat(time: endTime)
+        if !verifyEndTime {
+            alertWarning(title: "Failure", message: "Your end time format is not corect")
+            return 
+        }
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference()
         let values = ["name" : name,
@@ -136,13 +145,27 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         alertWarning(title: "Success", message: "Your product has been registered")
     }
     
+    func getImageSizeInBytes(image: UIImage) -> Int{
+        let imgData = image.pngData()
+        print("Size of Image: \(imgData?.count) bytes")
+        return (imgData?.count)!
+        
+    }
+    func verifyEndTimeFormat(time: String) -> Bool{
+        var components: Array = time.components(separatedBy: ":")
+        guard let hours = Int(components[0]), let minutes = Int(components[1]), let seconds = Int(components[2]) else {
+            return false
+        }
+        //if (hours >= 0 && hours <= 99) && (minutes >= 0 && minutes <= 99) && (seconds >= 0 && seconds <= 99)
+        return true
+    }
     func saveImageInStorage(images: UIImage, uids: String, name: String){
         let storageRef = Storage.storage().reference().child(uids).child("productImage").child(name)
         if let uploadData = images.pngData()
         { storageRef.putData(uploadData, metadata: nil, completion: {
                 (metadata, error) in
             guard let metadata = metadata else {
-                // Uh-oh, an error occurred!
+                self.alertWarning(title: "Failure",message: "Your image exceeds 1048 kB")
                 return
             }
             // Metadata contains file metadata such as size, content-type.
