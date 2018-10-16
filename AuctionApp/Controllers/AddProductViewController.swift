@@ -12,8 +12,7 @@ import Photos
 import FirebaseStorage
 import FirebaseDatabase
 
-class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate {
-
+class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate  {
    
     @IBOutlet weak var imageOfProduct: UIButton!
     @IBOutlet weak var tabBar: UITabBar!
@@ -21,9 +20,17 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
     @IBOutlet weak var descriptionTextField: UITextView!
     @IBOutlet weak var endTimeField: UITextField!
     @IBOutlet weak var lowestBidField: UITextField!
+    @IBOutlet weak var containterViewOfFields: UIView!
     var imagePicker = UIImagePickerController()
     let timePicker = UIDatePicker()
-    
+    var animateDistance: CGFloat!
+    struct MoveKeyboard {
+        static let KEYBOARD_ANIMATION_DURATION : CGFloat = 0.3
+        static let MINIMUM_SCROLL_FRACTION : CGFloat = 0.2;
+        static let MAXIMUM_SCROLL_FRACTION : CGFloat = 0.8;
+        static let PORTRAIT_KEYBOARD_HEIGHT : CGFloat = 216;
+        static let LANDSCAPE_KEYBOARD_HEIGHT : CGFloat = 162;
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionTextField.layer.borderColor = UIColor.lightGray.cgColor
@@ -33,14 +40,15 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         self.endTimeField.delegate = self
         self.lowestBidField.delegate = self
         self.imagePicker.delegate = self
+        
         checkPermission()
         
         // Do any additional setup after loading the view.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+        textField.resignFirstResponder()
+        return true
     }
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -70,7 +78,7 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     func checkPermission() {
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
         switch photoAuthorizationStatus {
@@ -99,9 +107,80 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         if textField == endTimeField{
             self.view.endEditing(true)
             openTimePicker()
-            
+
         }
+        let textFieldRect : CGRect = self.view.window!.convert(textField.bounds, from: textField)
+        let viewRect : CGRect = self.view.window!.convert(self.view.bounds, from: self.view)
+        
+        let midline : CGFloat = textFieldRect.origin.y + 0.5 * textFieldRect.size.height
+        let numerator : CGFloat = midline - viewRect.origin.y - MoveKeyboard.MINIMUM_SCROLL_FRACTION * viewRect.size.height
+        let denominator : CGFloat = (MoveKeyboard.MAXIMUM_SCROLL_FRACTION - MoveKeyboard.MINIMUM_SCROLL_FRACTION) * viewRect.size.height
+        var heightFraction : CGFloat = numerator / denominator
+        
+        if heightFraction < 0.0 {
+            heightFraction = 0.0
+        } else if heightFraction > 1.0 {
+            heightFraction = 1.0
+        }
+        
+        let orientation : UIInterfaceOrientation = UIApplication.shared.statusBarOrientation
+        if (orientation == UIInterfaceOrientation.portrait || orientation == UIInterfaceOrientation.portraitUpsideDown) {
+            animateDistance = floor(MoveKeyboard.PORTRAIT_KEYBOARD_HEIGHT * heightFraction)
+        } else {
+            animateDistance = floor(MoveKeyboard.LANDSCAPE_KEYBOARD_HEIGHT * heightFraction)
+        }
+        
+        var viewFrame : CGRect = self.view.frame
+        viewFrame.origin.y -= animateDistance
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(TimeInterval(MoveKeyboard.KEYBOARD_ANIMATION_DURATION))
+        
+        self.view.frame = viewFrame
+        
+        UIView.commitAnimations()
     }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        var viewFrame : CGRect = self.view.frame
+        viewFrame.origin.y += animateDistance
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        
+        UIView.setAnimationDuration(TimeInterval(MoveKeyboard.KEYBOARD_ANIMATION_DURATION))
+        
+        self.view.frame = viewFrame
+        
+        UIView.commitAnimations()
+        
+    }
+//        let xPosition = containterViewOfFields.frame.origin.x
+//
+//        //View will slide 20px up
+//        let yPosition = containterViewOfFields.frame.origin.y - 150
+//
+//        let height = containterViewOfFields.frame.size.height
+//        let width = containterViewOfFields.frame.size.width
+//
+//        //        UIView.animate(withDuration: 0.1, animations: {
+//
+//        //self.containterViewOfFields.frame = CGRect(x: xPosition, y: yPosition, width: width, height: height)
+//        for constraint in self.containterViewOfFields.constraints {
+//            if constraint.identifier == "modifiedTopSpace" {
+//                constraint.constant = 50
+//            }
+//        }
+//        containterViewOfFields.layoutIfNeeded()
+//
+//    }
+//    @objc func keyboardWillShow(sender: NSNotification) {
+//        self.containterViewOfFields.frame.origin.y = -150 // Move view 150 points upward
+//    }
+//
+//    @objc func keyboardWillHide(sender: NSNotification) {
+//        self.containterViewOfFields.frame.origin.y = 0 // Move view to original position
+//    }
     
     func openTimePicker() {
         timePicker.datePickerMode = UIDatePicker.Mode.time
