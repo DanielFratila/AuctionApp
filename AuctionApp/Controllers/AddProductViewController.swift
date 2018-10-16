@@ -148,6 +148,10 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
             alertWarning(title: "Failure", message: "Your image exceeds 1048 kB.Please upload another one!")
             return
         }
+        guard let lowestBidInteger = Int(lowestBid) else {
+            alertWarning(title: "Failure", message: "You must put a number which represents amount of dollars")
+            return
+        }
 //        var verifyEndTime = verifyEndTimeFormat(time: endTime)
 //        if !verifyEndTime {
 //            alertWarning(title: "Failure", message: "Your end time format is not corect")
