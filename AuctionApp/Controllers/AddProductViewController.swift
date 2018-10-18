@@ -24,13 +24,7 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
     var imagePicker = UIImagePickerController()
     let timePicker = UIDatePicker()
     var animateDistance: CGFloat!
-    struct MoveKeyboard {
-        static let KEYBOARD_ANIMATION_DURATION : CGFloat = 0.3
-        static let MINIMUM_SCROLL_FRACTION : CGFloat = 0.2;
-        static let MAXIMUM_SCROLL_FRACTION : CGFloat = 0.8;
-        static let PORTRAIT_KEYBOARD_HEIGHT : CGFloat = 216;
-        static let LANDSCAPE_KEYBOARD_HEIGHT : CGFloat = 162;
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionTextField.layer.borderColor = UIColor.lightGray.cgColor
@@ -107,6 +101,7 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         if textField == endTimeField{
             self.view.endEditing(true)
             openTimePicker()
+            return
 
         }
         let textFieldRect : CGRect = self.view.window!.convert(textField.bounds, from: textField)
@@ -142,6 +137,10 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
         UIView.commitAnimations()
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField == endTimeField {
+            return
+        }
         var viewFrame : CGRect = self.view.frame
         viewFrame.origin.y += animateDistance
         
@@ -192,7 +191,7 @@ class AddProductViewController: UIViewController, UITabBarDelegate,UINavigationC
     
     @objc func startTimeDiveChanged(sender: UIDatePicker) {
         let formatter = DateFormatter()
-        formatter.timeStyle = .full
+        formatter.timeStyle = .medium
         endTimeField.text = formatter.string(from: sender.date)
         timePicker.removeFromSuperview() // if you want to remove time picker
     }

@@ -13,7 +13,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    var animateDistance: CGFloat!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.setBottomBorder()
@@ -67,5 +68,53 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        let textFieldRect : CGRect = self.view.window!.convert(textField.bounds, from: textField)
+        let viewRect : CGRect = self.view.window!.convert(self.view.bounds, from: self.view)
+        
+        let midline : CGFloat = textFieldRect.origin.y + 0.5 * textFieldRect.size.height
+        let numerator : CGFloat = midline - viewRect.origin.y - MoveKeyboard.MINIMUM_SCROLL_FRACTION * viewRect.size.height
+        let denominator : CGFloat = (MoveKeyboard.MAXIMUM_SCROLL_FRACTION - MoveKeyboard.MINIMUM_SCROLL_FRACTION) * viewRect.size.height
+        var heightFraction : CGFloat = numerator / denominator
+        
+        if heightFraction < 0.0 {
+            heightFraction = 0.0
+        } else if heightFraction > 1.0 {
+            heightFraction = 1.0
+        }
+        
+        let orientation : UIInterfaceOrientation = UIApplication.shared.statusBarOrientation
+        if (orientation == UIInterfaceOrientation.portrait || orientation == UIInterfaceOrientation.portraitUpsideDown) {
+            animateDistance = floor(MoveKeyboard.PORTRAIT_KEYBOARD_HEIGHT * heightFraction)
+        } else {
+            animateDistance = floor(MoveKeyboard.LANDSCAPE_KEYBOARD_HEIGHT * heightFraction)
+        }
+        
+        var viewFrame : CGRect = self.view.frame
+        viewFrame.origin.y -= animateDistance
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(TimeInterval(MoveKeyboard.KEYBOARD_ANIMATION_DURATION))
+        
+        self.view.frame = viewFrame
+        
+        UIView.commitAnimations()
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        var viewFrame : CGRect = self.view.frame
+        viewFrame.origin.y += animateDistance
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        
+        UIView.setAnimationDuration(TimeInterval(MoveKeyboard.KEYBOARD_ANIMATION_DURATION))
+        
+        self.view.frame = viewFrame
+        
+        UIView.commitAnimations()
+        
+    }
 }

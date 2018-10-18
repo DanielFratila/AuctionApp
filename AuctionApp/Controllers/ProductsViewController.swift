@@ -79,7 +79,7 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        invalidateTimerForOffer()
         let destinationGlobalController = self.storyboard!.instantiateViewController(withIdentifier: "DetailOfProductViewController") as! DetailOfProductViewController
         destinationGlobalController.indexPathOfProduct = indexPath.item
         destinationGlobalController.products = self.filtered
@@ -117,10 +117,12 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.title {
         case "Add Product":
+            invalidateTimerForOffer()
             let viewContr = self.storyboard?.instantiateViewController(withIdentifier: "addProductViewController")
             viewContr!.modalTransitionStyle = .crossDissolve
             self.present(viewContr!, animated: true, completion: nil)
         case "Profile":
+            invalidateTimerForOffer()
             let viewContr = self.storyboard?.instantiateViewController(withIdentifier: "profileViewController")
             viewContr!.modalTransitionStyle = .crossDissolve
             self.present(viewContr!, animated: true, completion: nil)
@@ -215,6 +217,12 @@ class ProductsViewController: UIViewController,UICollectionViewDataSource,UIColl
             
         }
         offerLabels[index].text = "\(timeStringFromSecondsToHHMMSS(time: TimeInterval(secondsOfOfferedProduct[index])))"
+    }
+    
+    func invalidateTimerForOffer(){
+        for aux in timer{
+            aux.invalidate()
+        }
     }
 //    secondsOfOfferedProduct[index] = (Int(products[index].publishDate!) + timeStringFromHHMMSSToSeconds(string: products[index].endTimeOfProduct!)) -
 //    Int(products[index].publishDate!) + Int(NSDate().timeIntervalSince1970)
